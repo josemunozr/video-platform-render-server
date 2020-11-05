@@ -17,7 +17,7 @@ const oAuthStrategy = new OAuth2Strategy(
     clientSecret: config.googleClientSecret,
     callbackURL: '/auth/google-oauth/callback',
   },
-  async (accessToken, refreshToken, profile, cb) => {
+  async function (accessToken, refreshToken, profile, cb) {
     const { data, status } = await axios({
       url: `${config.apiUrl}/api/auth/sign-provider`,
       method: 'post',
@@ -37,7 +37,7 @@ const oAuthStrategy = new OAuth2Strategy(
   }
 );
 
-oAuthStrategy.userProfile = (accessToken, done) => {
+oAuthStrategy.userProfile = function(accessToken, done) {
   this._oauth2.get(GOOGLE_URSERINFO_URL, accessToken, (err, body) => {
     if (err) return done(err);
 

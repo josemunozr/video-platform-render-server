@@ -115,13 +115,15 @@ app.get(
   '/auth/google-oauth/callback',
   passport.authenticate('google-oauth', { session: false }),
   (req, res, next) => {
-    if ((!req, user)) return next(boom.unauthorized());
+    if ((!req.user)) return next(boom.unauthorized());
     const { token, ...user } = req.user;
 
-    req.cookies('token', token, {
+    res.cookie('token', token, {
       httpOnly: !config.dev,
       secureOnly: !config.dev,
     });
+    
+    res.status(200).json(user);
   }
 );
 
