@@ -6,7 +6,10 @@ const config = {
   apiUrl: process.env.API_URL,
   apiKeyToken: process.env.API_KEY_TOKEN,
   googleClientId: process.env.GOOGLE_CLIENT_ID,
-  googleClientSecret: process.env.GOOGLE_CLIENT_SECRET
+  googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  sessionSecret: process.env.SESSION_SECRET,
+  twitterConsumenKey: process.env.TWITTER_CONSUMEN_KEY,
+  twitterConsumenSecret: process.env.TWITTER_CONSUMEN_SECRET
 };
 
 module.exports = { config };
