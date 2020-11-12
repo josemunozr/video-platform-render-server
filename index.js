@@ -28,6 +28,9 @@ require('./utils/auth/strategies/google');
 // Twiiter Strategy
 require('./utils/auth/strategies/twitter');
 
+// Facebook Strategy
+require('./utils/auth/strategies/facebook');
+
 app.post('/auth/sign-in', async (req, res, next) => {
   passport.authenticate('basic', (error, data) => {
     try {
@@ -167,6 +170,25 @@ app.get(
   passport.authenticate('twitter', { session: false }),
   function (req, res, next) {
     if (!req.user) next(boom.unauthorized());
+
+    const { token, ...user } = req.user;
+
+    res.cookie('token', token, {
+      httpOnly: !config.dev,
+      secure: !config.dev,
+    });
+
+    res.status(200).json(user);
+  }
+);
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get(
+  '/auth/facebook/callback',
+  passport.authenticate('facebook', { session: false }),
+  function (req, res, next) {
+    if (!req.user) next(boom.unauthorized);
 
     const { token, ...user } = req.user;
 
