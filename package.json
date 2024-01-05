@@ -19,7 +19,7 @@
   "homepage": "https://github.com/josemunozr/video-platform-render-server#readme",
   "dependencies": {
     "@hapi/boom": "^9.1.0",
-    "axios": "^0.20.0",
+    "axios": "^1.6.4",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
